@@ -6,5 +6,7 @@ import com.wuochoang.binarybot.base.BaseView;
  * Created by HoangNQ on 23,July,2018
  */
 public interface BinaryView extends BaseView {
-    void getAccountBalance(String balance);
+
+    void getBalance(String balance);
+    void onAuthenicate(String text);
 }

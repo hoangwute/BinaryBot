@@ -17,10 +17,13 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
 import com.wuochoang.binarybot.App;
 import com.olddog.common.KeyboardUtils;
 
 import com.wuochoang.binarybot.R;
+import com.wuochoang.binarybot.model.BalanceReceived;
+import com.wuochoang.binarybot.model.BalanceRequest;
 
 /**
  * Created by quyenlx on 8/8/2017.
@@ -107,6 +110,17 @@ public class Utils {
                 setupUI(innerView, context);
             }
         }
+    }
+
+    public static String objectToJson(Object  object) {
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        return json;
+    }
+
+    public static BalanceReceived jsonToObject(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, BalanceReceived.class);
     }
 
 }
