@@ -1,8 +1,11 @@
 package com.wuochoang.binarybot;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 
+import com.olddog.common.ToastUtils;
 import com.wuochoang.binarybot.base.BaseActivity;
 import com.wuochoang.binarybot.base.BaseFragment;
 import com.wuochoang.binarybot.ui.home.MainFragment;
@@ -45,5 +48,19 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+    }
+
+    public void changeFitWindown() {
+        if (mainFragment != null)
+            mainFragment.changeFitWindow(-1);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onBackPressed() {
+//        mainFragment.onBackPress();
+        if (mainFragment != null && !mainFragment.onBackPress()) {
+            ToastUtils.show("Exit app");
+        }
     }
 }

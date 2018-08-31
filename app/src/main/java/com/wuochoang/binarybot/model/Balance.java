@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by HoangNQ on 24,July,2018
  */
-public class BalanceReceived {
+public class Balance {
 
     @SerializedName("balance")
     @Expose
@@ -20,6 +20,17 @@ public class BalanceReceived {
     @SerializedName("loginid")
     @Expose
     private String loginid;
+
+    public Balance(String balance, String currency, String id, String loginid) {
+        this.balance = balance;
+        this.currency = currency;
+        this.id = id;
+        this.loginid = loginid;
+    }
+
+    public Balance() {
+
+    }
 
     public String getBalance() {
         return balance;
@@ -52,6 +63,7 @@ public class BalanceReceived {
     public void setLoginid(String loginid) {
         this.loginid = loginid;
     }
+
 
 }
 

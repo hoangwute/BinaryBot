@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/toolBar"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/imgBanner"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_banner_binary"
+        app:layout_constraintTop_toTopOf="@+id/toolBar"
+        app:layout_constraintBottom_toBottomOf="@+id/toolBar"
+        app:layout_constraintLeft_toLeftOf="@+id/toolBar"/>
+
+    <LinearLayout
+        android:id="@+id/accountTypeLl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/toolBar"
+        app:layout_constraintBottom_toBottomOf="@+id/toolBar"
+        app:layout_constraintRight_toRightOf="@+id/toolBar">
+
+        <TextView
+            android:id="@+id/txtAccountType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Virtual Account"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Statement"
+            android:textSize="16sp"
+            android:textColor="@color/orangePrimary"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtShowHist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        android:text="Show historical transaction from "/>
+
+    <ImageView
+        android:id="@+id/imgCheckIn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtShowHist"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/txtDateFrom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/black"
+        android:text="July, 10 Tuesday"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/imgCheckIn"
+        app:layout_constraintTop_toTopOf="@+id/imgCheckIn"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCheckIn"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/grayLine"
+        app:layout_constraintLeft_toLeftOf="@+id/txtDateFrom"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateFrom"/>
+
+    <ImageView
+        android:id="@+id/imgCheckOut"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/txtDateTo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/black"
+        android:text="July, 11 Wednesday"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/imgCheckOut"
+        app:layout_constraintTop_toTopOf="@+id/imgCheckOut"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCheckOut"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/grayLine"
+        app:layout_constraintLeft_toLeftOf="@+id/txtDateTo"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateTo"/>
+
+    <Button
+        android:id="@+id/btnViewTransaction"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        android:text="View Transaction"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_rounded_primary"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/resultLl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewTransaction">
+
+        <TextView
+            android:id="@+id/txtResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Summary Statistics"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTotalTradeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Trades: "
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtResult"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtTotalTrades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            app:layout_constraintTop_toTopOf="@+id/txtTotalTradeTitle"
+            app:layout_constraintLeft_toRightOf="@+id/txtTotalTradeTitle"/>
+
+        <TextView
+            android:id="@+id/txtTotalItmLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total ITMs: "
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/txtTotalTradeTitle"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTotalItm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            app:layout_constraintTop_toTopOf="@+id/txtTotalItmLabel"
+            app:layout_constraintLeft_toRightOf="@+id/txtTotalItmLabel"/>
+
+        <TextView
+            android:id="@+id/txtWinRatioLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Win Ratio: "
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtTotalItmLabel"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtWinRatio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orangePrimary"
+            app:layout_constraintTop_toTopOf="@+id/txtWinRatioLabel"
+            app:layout_constraintLeft_toRightOf="@+id/txtWinRatioLabel"/>
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/grayLine"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtWinRatio"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtStatement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaction Details"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/line3"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvTransaction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultLl"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+
+</android.support.constraint.ConstraintLayout>

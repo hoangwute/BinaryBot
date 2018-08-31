@@ -2,6 +2,7 @@ package com.wuochoang.binarybot.ui.home.tabs;
 
 import com.wuochoang.binarybot.base.BaseFragment;
 import com.wuochoang.binarybot.ui.devices.DevicesFragment;
+import com.wuochoang.binarybot.ui.statement.StatementFragment;
 
 /**
  * Created by quyenlx on 8/9/2017.
@@ -10,7 +11,7 @@ import com.wuochoang.binarybot.ui.devices.DevicesFragment;
 public class Tab2Fragment extends BaseTabFragment {
     @Override
     public BaseFragment initFragment() {
-        return new DevicesFragment();
+        return new StatementFragment();
     }
 
 //

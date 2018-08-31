@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4db0d7</color>
-    <color name="colorPrimaryDark">#4db0d7</color>
-    <color name="colorAccent">#4db0d7</color>
+    <color name="colorPrimary">#2a3052</color>
+    <color name="colorPrimaryDark">#2a3052</color>
+    <color name="colorAccent">#2a3052</color>
     <color name="colorBlack_10">#1A000000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
@@ -28,7 +28,7 @@
     <color name="bg_search">#ededed</color>
     <color name="bg_item_table">#dedcdd</color>
     <color name="colorGreenAppDark">#659100</color>
-    <color name="green">#81ba00</color>
+    <color name="green">#2e8836</color>
     <color name="green_transparent">#CC81ba00</color>
     <color name="gray">#94a2af</color>
     <color name="white">#FFFFFF</color>
@@ -41,6 +41,7 @@
     <color name="blue">#447ebe</color>
     <color name="blue_delete">#4075dd</color>
     <color name="orange_submit">#f47320</color>
+    <color name="orangePrimary">#e98024</color>
     <color name="btn_disable_gray">#e6e3de</color>
     <color name="grayBackground">#e4eaf6</color>
     <color name="text_blue">#224c9e</color>
@@ -81,4 +82,5 @@
 
     <!-- graph color -->
     <color name="bg_screen">#e3ebf6</color>
+
 </resources>

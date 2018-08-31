@@ -69,4 +69,20 @@ public class StorageManager {
     public boolean getBooleanValue(String key) {
         return prefs.getBoolean(key, false);
     }
+
+    public boolean getBooleanValue(String key, boolean defaultValue) {
+        return prefs.getBoolean(key, defaultValue);
+    }
+
+    public double getDoubleValue(String key, double valueDefault) {
+        return Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(valueDefault)));
+    }
+
+    public void setDoubleValue(String key, double value) {
+        if (editor == null) {
+            editor = prefs.edit();
+        }
+        editor.putLong(key, Double.doubleToRawLongBits(value));
+        editor.commit();
+    }
 }

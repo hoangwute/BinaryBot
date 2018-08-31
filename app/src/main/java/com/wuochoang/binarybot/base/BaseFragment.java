@@ -94,11 +94,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void addFragment(BaseFragment fragment) {
         if (mActivity instanceof MainActivity) {
-            FragmentManager frm = ((MainActivity) mActivity).mainFragment.getFragmentManager();
-            frm.beginTransaction()
-                    .add(R.id.container, fragment)
-                    .addToBackStack(fragment.getClass().getSimpleName())
-                    .commit();
+                FragmentManager frm = ((MainActivity) mActivity).mainFragment.getCurrentFragmentMgr();
+                frm.beginTransaction()
+                        .add(R.id.tab_container, fragment)
+                        .addToBackStack(fragment.getClass().getSimpleName())
+                        .commit();
+                ((MainActivity) mActivity).changeFitWindown();
         }
     }
 
@@ -139,5 +140,9 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 //        // Show dialog thong báo
 //        OmiAlertDialog dialog = OmiAlertDialog.newInstanceOne(getContext(), "Error", "Lỗi mạng", "Ok");
 //        dialog.show(getFragmentManager(), null);
+    }
+
+    public boolean isShowFitWindows() {
+        return true;
     }
 }

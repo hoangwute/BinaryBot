@@ -1,11 +1,13 @@
 package com.wuochoang.binarybot.ui.devices;
 
 
+import com.olddog.common.ToastUtils;
 import com.wuochoang.binarybot.base.BaseFragment;
 import com.wuochoang.binarybot.base.BasePresenter;
 
 import butterknife.OnClick;
 import com.wuochoang.binarybot.R;
+import com.wuochoang.binarybot.ui.binary.view.BinaryFragment;
 
 /**
  * Created by quyenlx on 8/9/2017.
@@ -43,6 +45,6 @@ public class DevicesFragment extends BaseFragment {
 
     @OnClick(R.id.add)
     public void onClicked() {
-        addFragment(new DevicesFragment());
+        addFragment(new BinaryFragment());
     }
 }

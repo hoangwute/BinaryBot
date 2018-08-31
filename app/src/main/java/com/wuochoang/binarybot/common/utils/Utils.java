@@ -22,7 +22,7 @@ import com.wuochoang.binarybot.App;
 import com.olddog.common.KeyboardUtils;
 
 import com.wuochoang.binarybot.R;
-import com.wuochoang.binarybot.model.BalanceReceived;
+import com.wuochoang.binarybot.common.Constant;
 import com.wuochoang.binarybot.model.BalanceRequest;
 
 /**
@@ -118,9 +118,42 @@ public class Utils {
         return json;
     }
 
-    public static BalanceReceived jsonToObject(String json) {
-        Gson gson = new Gson();
-        return gson.fromJson(json, BalanceReceived.class);
+    public static String getContractType(String log) {
+        String contractType = "";
+        if (log.contains("CALL"))
+            contractType = Constant.CONTRACT_TYPE_CALL;
+        else if (log.contains("PUT"))
+            contractType = Constant.CONTRACT_TYPE_PUT;
+        return contractType;
+    }
+
+    public static String getCurrencyPair(String log) {
+        String pair = "";
+        if (log.contains("EURUSD")) {
+            pair = "frxEURUSD";
+        }
+        if (log.contains("EURJPY")) {
+            pair = "frxEURJPY";
+        }
+        if (log.contains("USDJPY")) {
+            pair = "frxUSDJPY";
+        }
+        if (log.contains("USDCAD")) {
+            pair = "frxUSDCAD";
+        }
+        if (log.contains("EURGBP")) {
+            pair = "frxEURGBP";
+        }
+        if (log.contains("USDCAD")) {
+            pair = "frxUSDCAD";
+        }
+        if (log.contains("USDCHF")) {
+            pair = "frxUSDCHF";
+        }
+        if (log.contains("GBPUSD")) {
+            pair = "frxGBPUSD";
+        }
+        return pair;
     }
 
 }

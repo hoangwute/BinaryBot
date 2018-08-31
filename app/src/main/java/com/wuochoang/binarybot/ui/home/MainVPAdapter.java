@@ -15,6 +15,7 @@ import com.wuochoang.binarybot.ui.home.tabs.Tab5Fragment;
  */
 
 public class MainVPAdapter extends FragmentStatePagerAdapter {
+
     private Tab1Fragment tab1Fragment;
     private Tab2Fragment tab2Fragment;
     private Tab3Fragment tab3Fragment;
@@ -60,6 +61,6 @@ public class MainVPAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 2;
     }
 }
