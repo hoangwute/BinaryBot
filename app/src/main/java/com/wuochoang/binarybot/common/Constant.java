@@ -22,6 +22,7 @@ public interface Constant {
 
     String isVirtual = "isVirtual";
     String ACCOUNT_BALANCE = "accountBalance";
+    String INTENT = "com.wuochoang.binarybot.notification.listener";
 
 
 

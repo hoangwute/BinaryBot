@@ -13,8 +13,8 @@ android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.wuochoang.basecode"
-        minSdkVersion 16
+        applicationId "com.wuochoang.binarybot"
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

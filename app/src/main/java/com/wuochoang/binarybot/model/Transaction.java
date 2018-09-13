@@ -44,6 +44,12 @@ public class Transaction {
     @SerializedName("transaction_time")
     @Expose
     private long transactionTime;
+    @SerializedName("buy_price")
+    @Expose
+    private String buyPrice;
+    @SerializedName("sell_price")
+    @Expose
+    private String sellPrice;
 
     public Transaction (String actionType, double amount, int appId, double balanceAfter, long contractId, String longCode, double payout, int purchaseTime, int referenceId, String shortCode, String transactionId, long transactionTime) {
         this.actionType = actionType;
@@ -158,5 +164,21 @@ public class Transaction {
 
     public void setTransactionTime(long transactionTime) {
         this.transactionTime = transactionTime;
+    }
+
+    public String getBuyPrice() {
+        return buyPrice;
+    }
+
+    public void setBuyPrice(String buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+
+    public String getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(String sellPrice) {
+        this.sellPrice = sellPrice;
     }
 }

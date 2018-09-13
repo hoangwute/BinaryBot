@@ -9,7 +9,10 @@ import android.widget.TextView;
 import com.wuochoang.binarybot.R;
 import com.wuochoang.binarybot.model.LogEntry;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +37,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((EntryLogViewHolder) holder).bind(logEntries.get(position) , position);
+        ((EntryLogViewHolder) holder).bind(logEntries.get(position));
 
     }
 
@@ -45,18 +48,40 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public class EntryLogViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.txtLogEntry)
-        TextView txtLogEntry;
+        @BindView(R.id.txtPair)
+        TextView txtPair;
+        @BindView(R.id.txtTime)
+        TextView txtTime;
+        @BindView(R.id.txtResult)
+        TextView txtResult;
+        @BindView(R.id.txtAction)
+        TextView txtAction;
 
         public EntryLogViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(LogEntry log, int position) {
-            txtLogEntry.setText(String.format("%d) %s", position + 1, log.getText()));
-            txtLogEntry.setTextColor(log.isSuccess() ? itemView.getContext().getResources().getColor(R.color.green)
-                            : itemView.getContext().getResources().getColor(R.color.red));
+        public void bind(LogEntry log) {
+            String logDate = new SimpleDateFormat("HH:mm:ss dd-MM-YYYY", Locale.US).format(new Date());
+
+            txtTime.setText(logDate);
+            if (log.isSuccess()) {
+                txtResult.setVisibility(View.VISIBLE);
+                txtAction.setVisibility(View.VISIBLE);
+                txtPair.setText(log.getPair().substring(3, log.getPair().length()));
+                txtResult.setText(log.getResult());
+                txtAction.setText(log.getAction());
+                if (log.getResult().equals("ITM"))
+                    txtResult.setTextColor(itemView.getResources().getColor(R.color.colorGreenApp));
+                else
+                    txtResult.setTextColor(itemView.getResources().getColor(R.color.colorRed));
+            }
+            else {
+                txtPair.setText(log.getPair());
+                txtResult.setVisibility(View.GONE);
+                txtAction.setVisibility(View.GONE);
+            }
         }
 
     }

@@ -106,7 +106,13 @@ public class StatementFragment extends BaseFragment {
     public void initView() {
         statementAdapter = new StatementAdapter(transactionList);
         rvTransaction.setAdapter(statementAdapter);
-        rvTransaction.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rvTransaction.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -147,7 +153,7 @@ public class StatementFragment extends BaseFragment {
         Observable<String> auObservable = Observable.create(e -> listener.setWsObservable(e));
         auObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    StatementRequest statementRequest = new StatementRequest(1, 1, 300,
+                    StatementRequest statementRequest = new StatementRequest(1, 1, 500,
                             Math.round(dateFromCalendar.getTime().getTime() / 1000), Math.round(dateToCalendar.getTime().getTime() / 1000), "sell");
                     ws.send(Utils.objectToJson(statementRequest));
                     Observable<String> statementObservable = Observable.create(e -> listener.setWsObservable(e));
@@ -155,6 +161,7 @@ public class StatementFragment extends BaseFragment {
                     statementObservable.subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(statementJson -> {
+                                Log.d("Statement", statementJson);
                                 transactionList = gson.fromJson(statementJson, StatementResponse.class).getStatement().getTransactionList();
                                 statementAdapter.updateTransactionList(transactionList);
                                 resultLl.setVisibility(View.VISIBLE);

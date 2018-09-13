@@ -82,5 +82,7 @@
 
     <!-- graph color -->
     <color name="bg_screen">#e3ebf6</color>
+    <color name="blackText">#2F3139</color>
+
 
 </resources>

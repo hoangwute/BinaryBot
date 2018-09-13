@@ -5,24 +5,29 @@ package com.wuochoang.binarybot.model;
  */
 public class LogEntry {
 
-    private String text;
+    private String pair;
     private boolean success;
+    private String action;
+    private String result;
 
-    public LogEntry(String text, boolean success) {
-        this.text = text;
-        this.success = success;
-    }
 
     public LogEntry() {
 
     }
 
-    public String getText() {
-        return text;
+    public LogEntry(String pair, String action, String result, boolean success) {
+        this.pair = pair;
+        this.action = action;
+        this.result = result;
+        this.success = success;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public String getPair() {
+        return pair;
+    }
+
+    public void setPair(String pair) {
+        this.pair = pair;
     }
 
     public boolean isSuccess() {
@@ -32,4 +37,22 @@ public class LogEntry {
     public void setSuccess(boolean success) {
         this.success = success;
     }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+
 }
