@@ -80,6 +80,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="16dp"
         android:src="@drawable/ic_port_number"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/txtContractDetails"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -92,6 +93,7 @@
         android:hint="Port #"
         android:textSize="14sp"
         android:inputType="number"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/imgPortNumber"
         app:layout_constraintTop_toTopOf="@+id/imgPortNumber"

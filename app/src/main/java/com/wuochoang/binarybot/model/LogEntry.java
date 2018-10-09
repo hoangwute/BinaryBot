@@ -9,17 +9,19 @@ public class LogEntry {
     private boolean success;
     private String action;
     private String result;
+    private String time;
 
 
     public LogEntry() {
 
     }
 
-    public LogEntry(String pair, String action, String result, boolean success) {
+    public LogEntry(String time, String pair, String action, String result, boolean success) {
         this.pair = pair;
         this.action = action;
         this.result = result;
         this.success = success;
+        this.time = time;
     }
 
     public String getPair() {
@@ -54,5 +56,11 @@ public class LogEntry {
         this.result = result;
     }
 
+    public String getTime() {
+        return time;
+    }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

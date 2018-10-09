@@ -63,9 +63,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
         public void bind(LogEntry log) {
-            String logDate = new SimpleDateFormat("HH:mm:ss dd-MM-YYYY", Locale.US).format(new Date());
-
-            txtTime.setText(logDate);
+            txtTime.setText(log.getTime());
             if (log.isSuccess()) {
                 txtResult.setVisibility(View.VISIBLE);
                 txtAction.setVisibility(View.VISIBLE);

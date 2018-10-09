@@ -30,7 +30,7 @@ public class NLServicee extends NotificationListenerService {
     @Override
     public IBinder onBind(Intent mIntent) {
         IBinder mIBinder = super.onBind(mIntent);
-        Log.d("NotificationListener", "Bindd");
+        Log.d("NotificationListener", "Bind");
         return mIBinder;
     }
 

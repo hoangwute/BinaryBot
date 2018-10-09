@@ -49,9 +49,11 @@ import com.wuochoang.binarybot.ui.devices.DevicesFragment;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -63,8 +65,6 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by HoangNQ on 23,July,2018
@@ -97,8 +97,10 @@ public class BinaryFragment extends BaseFragment {
     private Gson gson;
     private ActivityLogAdapter activityLogAdapter;
     private List<LogEntry> logEntries = new ArrayList<>();
-    private Date trackingDate;
-//    private ProgressDialog progressDialog;
+    private long lastTrade = 0;
+    private int [] stakeSequence = {1, 2, 4, 6, 8 , 16};
+    private int loseStack = 0;
+    private int timeFrame = 100000;
 
     BinaryPresenter binaryPresenter = new BinaryPresenter();
     private EchoWebSocketListener listener;
@@ -220,16 +222,17 @@ public class BinaryFragment extends BaseFragment {
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe(contractJson -> {
                                             Log.d("Procedure", "Contract brought");
-                                            activityLogAdapter.notifyDataSetChanged();
                                             ToastUtils.show("Contract has been successfully brought");
                                             new Handler().postDelayed(() -> { //update log after 5 minutes
                                                 Log.d("Procedure", "5 mins after");
                                                 getProfitTableAccount();
-                                            }, 300000);
+                                            }, timeFrame);
 
                                         });
                             }, throwable -> {
                                 LogEntry failLogEntry = new LogEntry();
+                                String logDate = new SimpleDateFormat("HH:mm:ss dd-MM-YYYY", Locale.US).format(new Date());
+                                failLogEntry.setTime(logDate);
                                 failLogEntry.setPair(throwable.getMessage());
                                 failLogEntry.setSuccess(false);
                                 logEntries.add(failLogEntry);
@@ -267,19 +270,24 @@ public class BinaryFragment extends BaseFragment {
                                 List<Transaction> transactionList = gson.fromJson(success, ProfitTableResponse.class).getProfitTable().getTransactionList();
                                 String pair = Utils.getCurrencyPair(transactionList.get(0).getShortCode());
                                 Log.d("Procedure", pair);
+                                String logDate = new SimpleDateFormat("HH:mm:ss dd-MM-YYYY", Locale.US).format(new Date());
                                 if (Double.parseDouble(transactionList.get(0).getSellPrice()) > 0) {
-                                    logEntries.add(new LogEntry(pair, transactionList.get(0).getActionType(), "ITM", true));
+                                    logEntries.add(new LogEntry(logDate, pair, transactionList.get(0).getActionType(), "ITM", true));
+                                    loseStack = 0;
                                 }
-                                else
-                                    logEntries.add(new LogEntry(pair, transactionList.get(0).getActionType(), "OTM", true));
+                                else {
+                                    if (loseStack == 5)
+                                        loseStack = 0;
+                                    else
+                                        ++loseStack;
+                                    logEntries.add(new LogEntry(logDate, pair, transactionList.get(0).getActionType(), "OTM", true));
+                                }
                                 activityLogAdapter.notifyDataSetChanged();
                                 ws.close(1000, null);
-//                                progressDialog.dismiss();
                             }, throwable -> {
                                 Log.d("Procedure", throwable.getMessage());
                                 ToastUtils.show(throwable.getMessage());
                                 ws.close(1000, null);
-//                                progressDialog.dismiss();
                             });
                 });
     }
@@ -361,8 +369,27 @@ public class BinaryFragment extends BaseFragment {
                     extras.getString(Notification.EXTRA_TEXT);
             Log.d("NotificationListener", notificationBody);
             ToastUtils.show(notificationBody);
-            if (notificationBody.contains("Valid Signal"))
-                getProposal(txtPurchasePrice.getText().toString(), Utils.getContractType(notificationBody), txtDuration.getText().toString(), Constant.CONTRACT_DURATION_UNIT_MINUTE, Utils.getCurrencyPair(notificationBody));
+            String pair = Utils.getCurrencyPair(notificationBody);
+//            if (notificationBody.contains("Valid Signal")) {
+                long timeDifference;
+                timeDifference = new Date().getTime() - lastTrade;
+                lastTrade = new Date().getTime();
+                Log.d("DateTest", timeDifference + "");
+                if (timeDifference > timeFrame) {
+                    getProposal(String.valueOf(stakeSequence[loseStack]), "CALL", txtDuration.getText().toString(), Constant.CONTRACT_DURATION_UNIT_MINUTE, "frxUSDJPY");
+//                    getProposal(String.valueOf(stakeSequence[loseStack]), Utils.getContractType(notificationBody), txtDuration.getText().toString(), Constant.CONTRACT_DURATION_UNIT_MINUTE, Utils.getCurrencyPair(notificationBody));
+                }
+                else {
+                    LogEntry failLogEntry = new LogEntry();
+                    Log.d("Procedure", "Time elapsed since last trade hasn't reached 5 minutes");
+                    String logDate = new SimpleDateFormat("HH:mm:ss dd-MM-YYYY", Locale.US).format(new Date());
+                    failLogEntry.setPair(pair + "Time elapsed since last trade hasn't reached 5 minutes.");
+                    failLogEntry.setSuccess(false);
+                    failLogEntry.setTime(logDate);
+                    logEntries.add(failLogEntry);
+                    activityLogAdapter.notifyDataSetChanged();
+                }
+//            }
 
         }
     }
